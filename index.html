@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050912">
+<meta name="theme-color" content="#07111f">
 
-<title>ARCHERY SCORE — إنجاز الرامي</title>
+<title>ARCHERY SCORE PRO — تحليل وإنجاز الرامي المطور</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,45 +15,58 @@
 *{
   box-sizing:border-box;
   margin:0;
-  padding:0
+  padding:0;
 }
 
-:root[data-theme="dark"] {
+:root{
   --bg:#050912;
   --bg2:#09111f;
   --card:#0d1728;
   --card2:#111e32;
   --card3:#15243b;
   --line:#20314b;
+  --line2:#2b4262;
+
   --text:#f8fbff;
   --muted:#8291a8;
+
   --gold:#f4c95d;
   --gold2:#ffe394;
+  --gold3:#bd8b21;
+
   --green:#38e09b;
   --red:#ff5f78;
   --blue:#5da7ff;
+  --purple:#a77bff;
+  --cyan:#45d9e8;
+
   --shadow:0 25px 70px rgba(0,0,0,.38);
+  --radius:22px;
 }
 
-:root[data-theme="light"] {
-  --bg:#f4f7fc;
-  --bg2:#e6ecf5;
+[data-theme="light"] {
+  --bg:#f0f4f9;
+  --bg2:#e1e8f0;
   --card:#ffffff;
-  --card2:#f0f4f9;
-  --card3:#e2e8f0;
+  --card2:#f5f7fa;
+  --card3:#e8eeea;
   --line:#cbd5e1;
+  --line2:#94a3b8;
+
   --text:#0f172a;
   --muted:#64748b;
+
   --gold:#d97706;
   --gold2:#f59e0b;
+  --gold3:#b45309;
+
   --green:#10b981;
   --red:#ef4444;
   --blue:#3b82f6;
-  --shadow:0 15px 45px rgba(0,0,0,.08);
-}
+  --purple:#8b5cf6;
+  --cyan:#06b6d4;
 
-:root {
-  --radius:22px;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
 html{
@@ -64,9 +77,25 @@ body{
   min-height:100vh;
   color:var(--text);
   font-family:"Cairo","Tajawal",sans-serif;
-  background:var(--bg);
-  transition: background .3s, color .3s;
+  background:
+    radial-gradient(circle at 90% -10%,rgba(244,201,93,.12),transparent 28%),
+    radial-gradient(circle at -10% 25%,rgba(69,217,232,.08),transparent 25%),
+    linear-gradient(145deg,var(--bg),var(--bg2) 48%,var(--bg));
   overflow-x:hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.035;
+  background-image:
+    linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:linear-gradient(to bottom,#000,transparent 80%);
 }
 
 button,input,select{
@@ -85,6 +114,7 @@ button{
 }
 
 /* HEADER */
+
 header{
   display:flex;
   align-items:center;
@@ -106,19 +136,25 @@ header{
   display:grid;
   place-items:center;
   font-size:28px;
-  background:var(--card2);
-  border:1px solid var(--gold);
-  box-shadow:var(--shadow);
+  background:
+    linear-gradient(145deg,var(--card2),var(--card));
+  border:1px solid rgba(244,201,93,.35);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.02) inset,
+    0 15px 40px rgba(0,0,0,.15),
+    0 0 30px rgba(244,201,93,.08);
 }
 
 .brand h1{
   font-size:23px;
   font-weight:900;
+  letter-spacing:.5px;
 }
 
 .brand p{
   color:var(--muted);
   font-size:11px;
+  margin-top:2px;
 }
 
 .header-actions{
@@ -134,6 +170,10 @@ header{
   border:1px solid var(--line);
   color:var(--text);
   transition:.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
 
 .icon-btn:hover{
@@ -142,10 +182,11 @@ header{
 }
 
 /* NAV */
+
 .nav{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
   padding:7px;
   margin-bottom:17px;
   border-radius:19px;
@@ -163,10 +204,11 @@ header{
   color:var(--muted);
   background:transparent;
   border-radius:13px;
-  padding:12px 7px;
-  font-size:12px;
+  padding:12px 4px;
+  font-size:11px;
   font-weight:800;
   transition:.2s;
+  white-space: nowrap;
 }
 
 .nav button:hover{
@@ -175,12 +217,15 @@ header{
 }
 
 .nav button.active{
-  color:#fff;
+  color:#171208;
   background:linear-gradient(135deg,var(--gold2),var(--gold));
-  box-shadow:0 5px 18px rgba(0,0,0,.15);
+  box-shadow:
+    0 5px 18px rgba(244,201,93,.18),
+    inset 0 1px rgba(255,255,255,.5);
 }
 
 /* PAGES */
+
 .page{
   display:none;
   animation:pageIn .25s ease;
@@ -196,6 +241,7 @@ header{
 }
 
 /* CARDS */
+
 .card{
   position:relative;
   overflow:hidden;
@@ -205,6 +251,17 @@ header{
   border-radius:var(--radius);
   background:var(--card);
   box-shadow:var(--shadow);
+}
+
+.card:before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-100px;
+  top:-120px;
+  background:radial-gradient(circle,rgba(244,201,93,.09),transparent 70%);
+  pointer-events:none;
 }
 
 .card-title{
@@ -226,9 +283,10 @@ header{
 }
 
 /* SETUP */
+
 .setup{
   display:grid;
-  grid-template-columns:1.2fr 1fr 1fr 1fr;
+  grid-template-columns:1fr 1fr 1fr 1fr;
   gap:9px;
 }
 
@@ -249,49 +307,92 @@ header{
   border:1px solid var(--line);
   border-radius:12px;
   outline:none;
+  transition:.2s;
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(244,201,93,.1);
 }
 
 /* LAYOUT */
+
 .grid{
   display:grid;
   grid-template-columns:1.25fr .75fr;
   gap:14px;
 }
 
-/* TARGET FACE INTERACTIVE */
-.target-container {
+/* TARGET CONTAINER & SVG */
+
+.target-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 15px 0;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.target-container {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .target-svg {
   width: 100%;
-  max-width: 320px;
-  height: auto;
-  cursor: pointer;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.25));
-  user-select: none;
+  height: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+  border-radius: 50%;
+  cursor: crosshair;
 }
 
-.target-ring {
-  transition: opacity 0.15s, transform 0.15s;
+.hole-mark {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #555, #000 80%);
+  border: 1.5px solid #fff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 6px rgba(0,0,0,0.8), inset 0 0 2px rgba(0,0,0,0.9);
+  pointer-events: none;
+  animation: holePop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.target-ring:hover {
-  opacity: 0.85;
-  stroke: var(--gold);
-  stroke-width: 2px;
+.hole-mark.p1-hole {
+  border-color: var(--gold);
+  background: radial-gradient(circle at 35% 35%, #f59e0b, #78350f 80%);
 }
 
-.target-ring:active {
-  transform: scale(0.98);
-  transform-origin: center;
+.hole-mark.p2-hole {
+  border-color: var(--cyan);
+  background: radial-gradient(circle at 35% 35%, #06b6d4, #164e63 80%);
 }
 
-/* SCORE DISPLAY */
+.hole-mark::after {
+  content: attr(data-val);
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 3px #000, 0 0 3px #000;
+}
+
+@keyframes holePop {
+  0% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* SCORE */
+
 .score-hero{
   text-align:center;
   padding:8px 0 18px;
@@ -302,11 +403,15 @@ header{
   font-size:67px;
   line-height:1;
   font-weight:900;
+  letter-spacing:-2px;
+  text-shadow:0 8px 35px rgba(244,201,93,.13);
 }
 
 .total small{
   color:var(--muted);
   font-size:15px;
+  font-weight:600;
+  letter-spacing:0;
 }
 
 .percent{
@@ -338,11 +443,13 @@ header{
 
 .stat span{
   display:block;
+  margin-top:2px;
   color:var(--muted);
   font-size:9px;
 }
 
 /* CURRENT END */
+
 .current{
   padding:15px;
   margin-bottom:12px;
@@ -353,70 +460,98 @@ header{
 }
 
 .current .arrows{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
   gap:7px;
   margin:4px auto 12px;
   max-width:520px;
 }
 
 .dot{
-  width:100%;
-  aspect-ratio:1;
-  max-width:58px;
-  margin:auto;
+  width:44px;
+  height:44px;
   display:grid;
   place-items:center;
   border-radius:50%;
   color:var(--text);
-  background:var(--card3);
+  background:var(--card);
   border:1px solid var(--line);
   font-size:15px;
   font-weight:900;
+  transition:.2s;
+}
+
+.dot:not(:empty){
+  border-color:rgba(244,201,93,.4);
 }
 
 .current-score{
   color:var(--gold);
   font-size:27px;
+  line-height:1;
   font-weight:900;
 }
 
-/* BUTTONS */
-.actions{
-  display:flex;
-  flex-wrap:wrap;
+#endLabel{
+  color:var(--gold);
+  font-weight:800;
+}
+
+/* ARROW BUTTONS */
+
+.arrow-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
   gap:8px;
-  justify-content: center;
 }
 
-.btn{
-  padding:12px 16px;
-  color:#fff;
-  background:linear-gradient(135deg,var(--gold2),var(--gold));
-  border:0;
-  border-radius:13px;
-  font-weight:900;
-  transition:.18s;
-}
-
-.btn.secondary{
+.arrow{
+  min-height:50px;
+  border-radius:15px;
+  border:1px solid var(--line);
   color:var(--text);
   background:var(--card2);
-  border:1px solid var(--line);
+  font-size:18px;
+  font-weight:900;
+  transition:.14s;
+  box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
-.btn.danger{
-  color:var(--red);
-  background:rgba(255,95,120,.1);
-  border:1px solid var(--red);
+.arrow:hover{
+  transform:translateY(-2px);
+  border-color:var(--gold);
 }
 
-.btn.green{
-  color:#fff;
-  background:var(--green);
+.arrow:active{
+  transform:scale(.94);
+}
+
+.arrow[data-v="10"], .arrow[data-v="X"]{
+  color:var(--gold);
+  border-color:rgba(244,201,93,.4);
+}
+
+.arrow[data-v="9"]{
+  color:#ff6e83;
+  border-color:rgba(255,110,131,.3);
+}
+
+.arrow[data-v="8"]{
+  color:var(--blue);
+  border-color:rgba(93,167,255,.3);
+}
+
+.arrow[data-v="7"]{
+  color:var(--green);
+}
+
+.arrow[data-v="M"]{
+  color:#8a96aa;
 }
 
 /* ENDS */
+
 .ends{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -424,21 +559,475 @@ header{
 }
 
 .end{
+  position:relative;
+  min-height:105px;
   padding:10px;
   text-align:center;
   border:1px solid var(--line);
   border-radius:15px;
   background:var(--card2);
+  overflow:hidden;
+}
+
+.end:after{
+  content:"";
+  position:absolute;
+  height:2px;
+  left:15%;
+  right:15%;
+  bottom:0;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.45;
+}
+
+.end strong{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
 }
 
 .end b{
   display:block;
   color:var(--gold);
-  font-size:24px;
+  font-size:26px;
+  font-weight:900;
+  margin:4px 0;
+}
+
+.end div{
+  color:var(--muted);
+  font-size:9px;
+}
+
+/* BUTTONS */
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.btn{
+  padding:12px 16px;
+  color:#151109;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  border:0;
+  border-radius:13px;
+  font-weight:900;
+  box-shadow:0 8px 22px rgba(244,201,93,.1);
+  transition:.18s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn.secondary{
+  color:var(--text);
+  background:var(--card2);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+
+.btn.danger{
+  color:var(--red);
+  background:rgba(255,95,120,.08);
+  border:1px solid rgba(255,95,120,.25);
+  box-shadow:none;
+}
+
+.btn.green{
+  color:#06130e;
+  background:var(--green);
+}
+
+.btn.purple{
+  color:#fff;
+  background:linear-gradient(135deg, var(--purple), #7c3aed);
+  box-shadow:0 8px 22px rgba(167,123,255,.2);
+}
+
+/* MODE TOGGLE BUTTONS */
+
+.mode-toggle-group {
+  display: flex;
+  background: var(--card2);
+  padding: 4px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+
+.mode-toggle-btn {
+  flex: 1;
+  padding: 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  transition: 0.2s;
+}
+
+.mode-toggle-btn.active {
+  background: var(--card);
+  color: var(--gold);
+  border: 1px solid rgba(244,201,93,0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* MOTIVATION */
+
+.motivation{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  z-index:100;
+  width:min(92%,500px);
+  padding:17px 18px;
+  text-align:center;
+  border:1px solid rgba(244,201,93,.4);
+  border-radius:20px;
+  background:var(--card);
+  backdrop-filter:blur(20px);
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,30px) scale(.92);
+  transition:.3s;
+}
+
+.motivation.show{
+  opacity:1;
+  transform:translate(-50%,0) scale(1);
+}
+
+.motivation .big{
+  font-size:30px;
+}
+
+.motivation h3{
+  color:var(--gold);
+  font-size:17px;
   font-weight:900;
 }
 
-/* TOAST & MOTIVATION */
+.motivation p{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+/* ELIMINATION */
+
+.elim-players-setup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.duel{
+  display:grid;
+  grid-template-columns:1fr 60px 1fr;
+  gap:10px;
+  align-items:center;
+  text-align:center;
+}
+
+.player-box{
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--card2);
+  transition: 0.2s;
+}
+
+.player-box.active-turn {
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(244,201,93,.3);
+}
+
+.player-box.me{
+  border-color:rgba(244,201,93,.42);
+}
+
+.player-name{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+}
+
+.match-points{
+  color:var(--gold);
+  font-size:45px;
+  font-weight:900;
+  line-height:1;
+  margin:8px 0;
+}
+
+.round-score{
+  font-size:15px;
+  font-weight:800;
+}
+
+.vs{
+  color:var(--muted);
+  font-weight:900;
+}
+
+.rounds{
+  display:grid;
+  gap:7px;
+  margin-top:14px;
+}
+
+.round{
+  display:grid;
+  grid-template-columns:60px 1fr 35px 1fr;
+  align-items:center;
+  padding:10px;
+  text-align:center;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:var(--card2);
+}
+
+.round.win{
+  border-color:rgba(56,224,155,.35);
+}
+
+.round b{
+  font-size:18px;
+}
+
+.round .result{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.shootout{
+  display:none;
+  margin-top:14px;
+  padding:15px;
+  text-align:center;
+  border:1px solid rgba(244,201,93,.35);
+  border-radius:17px;
+  background:rgba(244,201,93,.06);
+}
+
+.shootout.show{
+  display:block;
+}
+
+.shootout strong{
+  color:var(--gold);
+}
+
+.shootout p{
+  color:var(--muted);
+  font-size:10px;
+  margin:5px 0 10px;
+}
+
+/* ANALYSIS MODAL / CARD */
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.analysis-card {
+  padding: 14px;
+  background: var(--card2);
+  border-radius: 16px;
+  border: 1px solid var(--line);
+}
+
+.analysis-card h4 {
+  font-size: 13px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.analysis-card p {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.grouping-visual {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 10px auto;
+  border-radius: 50%;
+  border: 2px dashed var(--line2);
+  background: rgba(0,0,0,0.2);
+}
+
+.grouping-visual .axis-x, .grouping-visual .axis-y {
+  position: absolute;
+  background: rgba(255,255,255,0.1);
+}
+
+.grouping-visual .axis-x { top: 50%; left: 0; right: 0; height: 1px; }
+.grouping-visual .axis-y { left: 50%; top: 0; bottom: 0; width: 1px; }
+
+.grouping-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  transform: translate(-50%, -50%);
+}
+
+.grouping-center-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid #fff;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+/* LIFETIME COUNTER */
+
+.counter-hero {
+  text-align: center;
+  padding: 20px 10px;
+  background: linear-gradient(145deg, var(--card2), var(--card3));
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  margin-bottom: 15px;
+}
+
+.counter-val {
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--cyan);
+  text-shadow: 0 0 25px rgba(69,217,232,0.3);
+  line-height: 1.1;
+}
+
+.counter-input-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.counter-input-row input {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 14px;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+/* HISTORY */
+
+.history-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:14px 3px;
+  border-bottom:1px solid var(--line);
+}
+
+.history-item:last-child{
+  border-bottom:0;
+}
+
+.badge{
+  display:inline-block;
+  padding:4px 8px;
+  margin-top:3px;
+  border-radius:7px;
+  color:var(--muted);
+  background:var(--card2);
+  font-size:9px;
+}
+
+.empty{
+  padding:35px 10px;
+  color:var(--muted);
+  text-align:center;
+}
+
+/* SETTINGS */
+
+.settings-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.setting{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--card2);
+}
+
+.setting b{
+  font-size:13px;
+}
+
+.setting p{
+  color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+}
+
+.switch{
+  width:48px;
+  height:27px;
+  padding:3px;
+  border-radius:30px;
+  background:#25344c;
+  transition:.2s;
+  cursor: pointer;
+}
+
+.switch i{
+  display:block;
+  width:21px;
+  height:21px;
+  border-radius:50%;
+  background:#fff;
+  transition:.2s;
+}
+
+.switch.on{
+  background:var(--gold);
+}
+
+.switch.on i{
+  transform:translateX(-21px);
+}
+
+/* TOAST */
+
 .toast{
   position:fixed;
   top:18px;
@@ -446,17 +1035,120 @@ header{
   z-index:120;
   padding:12px 18px;
   color:var(--text);
-  background:var(--card2);
+  background:var(--card);
   border:1px solid var(--line);
   border-radius:13px;
+  box-shadow:0 15px 45px rgba(0,0,0,.35);
+  font-size:11px;
   transform:translate(-50%,-80px);
   transition:.3s;
 }
-.toast.show{ transform:translate(-50%,0); }
+
+.toast.show{
+  transform:translate(-50%,0);
+}
 
 /* RESPONSIVE */
+
 @media(max-width:800px){
-  .grid, .setup{ grid-template-columns:1fr; }
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .setup{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .analysis-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width:520px){
+  .app{
+    padding:12px 10px 95px;
+  }
+
+  header{
+    margin-bottom:14px;
+  }
+
+  .logo{
+    width:48px;
+    height:48px;
+    border-radius:15px;
+    font-size:24px;
+  }
+
+  .brand h1{
+    font-size:18px;
+  }
+
+  .brand p{
+    font-size:9px;
+  }
+
+  .nav{
+    border-radius:16px;
+  }
+
+  .nav button{
+    font-size:9px;
+    padding:10px 2px;
+  }
+
+  .card{
+    padding:13px;
+    border-radius:18px;
+  }
+
+  .setup{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .total{
+    font-size:57px;
+  }
+
+  .dot{
+    width:36px;
+    height:36px;
+    font-size:12px;
+  }
+
+  .arrow-grid{
+    gap:6px;
+  }
+
+  .arrow{
+    min-height:48px;
+    font-size:15px;
+    border-radius:13px;
+  }
+
+  .ends{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .duel{
+    grid-template-columns:1fr 30px 1fr;
+  }
+
+  .match-points{
+    font-size:35px;
+  }
+
+  .round{
+    grid-template-columns:42px 1fr 25px 1fr;
+  }
+
+  .settings-grid{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -470,132 +1162,516 @@ header{
     <div class="logo">🏹</div>
     <div>
       <h1>ARCHERY SCORE</h1>
-      <p>هدف رمي تفاعلي ذكي</p>
+      <p>مدربك الرقمي للسكور والتحليل والتحدي</p>
     </div>
   </div>
 
   <div class="header-actions">
-    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="تغيير الثيم">🌙</button>
-    <button class="icon-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
-    <button class="icon-btn" onclick="resetAll()">↻</button>
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="تبديل الوضع">🌙</button>
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="الصوت">🔊</button>
+    <button class="icon-btn" onclick="resetAll()" title="إعادة ضبط الجلسة">↻</button>
   </div>
 </header>
 
 <nav class="nav">
   <button class="active" onclick="showPage('score',this)">🎯 السكور</button>
-  <button onclick="showPage('history',this)">📊 السجل</button>
+  <button onclick="showPage('analysis',this)">📊 التحليل</button>
+  <button onclick="showPage('elim',this)">⚔️ الإقصائي</button>
+  <button onclick="showPage('counter',this)">🔢 العداد</button>
+  <button onclick="showPage('settings',this)">⚙️ الإعدادات</button>
 </nav>
 
-<!-- SCORE SECTION -->
+<!-- SCORE PAGE -->
+
 <section id="score" class="page active">
 
 <div class="card">
   <div class="card-title">
-    <h2>إعداد الجولة والهدف</h2>
+    <h2>إعداد الجولة</h2>
+    <span id="setupInfoHint">6 أسهم لكل جولة</span>
   </div>
 
   <div class="setup">
-    <div class="field">
-      <label>اسم الرامي</label>
-      <input id="archerName" value="عمران">
-    </div>
 
     <div class="field">
-      <label>نوع الهدف التفاعلي</label>
-      <select id="targetType" onchange="renderTarget()">
-        <option value="10">هدف 10 خواتم (WA 10-Ring Full)</option>
-        <option value="6">هدف 6 خواتم (WA 6-Ring Center)</option>
-      </select>
+      <label>اسم الرامي</label>
+      <input id="archerName" value="عمران" onchange="saveSettingsLocally()">
     </div>
 
     <div class="field">
       <label>المسافة</label>
-      <input id="distance" value="40 متر">
+      <input id="distance" value="40 متر" onchange="saveSettingsLocally()">
     </div>
 
     <div class="field">
-      <label>عدد الأسهم الإجمالي</label>
-      <select id="arrowCount">
-        <option value="36">36 سهمًا · 6 جولات</option>
-        <option value="72">72 سهمًا · 12 جولة</option>
+      <label>نوع الهدف</label>
+      <select id="targetType" onchange="onTargetTypeChange()">
+        <option value="10">هدف كامل (10 خواتم)</option>
+        <option value="6">هدف ثلاثي / 6 خواتم (6-10)</option>
       </select>
     </div>
+
+    <div class="field">
+      <label>عدد الأسهم والأسهم/جولة</label>
+      <select id="arrowCount" onchange="onArrowConfigChange()">
+        <option value="36-6">36 سهمًا · 6 جولات (6 أسهم)</option>
+        <option value="72-6">72 سهمًا · 12 جولة (6 أسهم)</option>
+        <option value="30-3">30 سهمًا · 10 جولات (3 أسهم)</option>
+        <option value="60-3">60 سهمًا · 20 جولة (3 أسهم)</option>
+      </select>
+    </div>
+
   </div>
 </div>
 
 <div class="grid">
 
 <div>
+
 <div class="card">
+
   <div class="card-title">
-    <h2>اضغط على الهدف لتسجيل السهم</h2>
+    <h2>إطلاق الأسهم والتصويب المباشر</h2>
     <span id="endLabel">الجولة 1 · السهم 1/6</span>
   </div>
 
-  <!-- TARGET SVG AREA -->
-  <div class="target-container" id="targetWrapper">
-    <!-- SVG rendered dynamically -->
+  <!-- TARGET DISPLAY -->
+  <div class="target-wrapper">
+    <div class="target-container" id="targetContainer">
+      <svg class="target-svg" id="targetSvg" viewBox="0 0 200 200" onclick="handleTargetClick(event)">
+        <!-- Rings will be drawn dynamically -->
+      </svg>
+      <div id="holesLayer"></div>
+    </div>
   </div>
 
   <div class="current">
-    <div class="arrows">
-      <div class="dot" id="a1">—</div>
-      <div class="dot" id="a2">—</div>
-      <div class="dot" id="a3">—</div>
-      <div class="dot" id="a4">—</div>
-      <div class="dot" id="a5">—</div>
-      <div class="dot" id="a6">—</div>
+
+    <div class="arrows" id="dotsContainer">
+      <!-- Generated Dynamically -->
     </div>
+
     <div class="current-score" id="currentEndScore">0</div>
+
   </div>
 
-  <div class="actions">
-    <button class="btn danger" onclick="addArrow(0, true)">M (خارج الهدف)</button>
-    <button class="btn secondary" onclick="undoArrow()">⌫ تراجع</button>
-    <button class="btn secondary" onclick="clearCurrentEnd()">مسح الجولة</button>
-    <button class="btn green" onclick="finishSession()">حفظ وإنهاء</button>
+  <div class="arrow-grid" id="arrowButtonsGrid">
+    <!-- Generated Dynamically -->
   </div>
+
+  <div class="actions" style="margin-top:12px">
+    <button class="btn green" onclick="finishSession()">إنهاء وثبيت الجلسة</button>
+    <button class="btn purple" onclick="openAnalysisPage()">🔍 تحليل رمايتك</button>
+    <button class="btn secondary" onclick="clearCurrentEnd()">مسح الجولة الحالية</button>
+  </div>
+
 </div>
 
 <div class="card">
+
   <div class="card-title">
-    <h2>سجل الجولات</h2>
+    <h2>الجولات المحسوبة</h2>
     <span id="endCount">0 / 6</span>
   </div>
+
   <div class="ends" id="ends"></div>
+
 </div>
 
 </div>
 
 <div>
+
 <div class="card">
+
   <div class="score-hero">
-    <div class="total" id="total">0<small>/360</small></div>
+
+    <div class="total" id="total">
+      0<small>/360</small>
+    </div>
+
     <div class="percent" id="percent">0.0%</div>
+
   </div>
 
   <div class="stats">
-    <div class="stat"><b id="tens">0</b><span>10</span></div>
-    <div class="stat"><b id="nines">0</b><span>9</span></div>
-    <div class="stat"><b id="eights">0</b><span>8</span></div>
-    <div class="stat"><b id="avg">0.00</b><span>معدل السهم</span></div>
+
+    <div class="stat">
+      <b id="tens">0</b>
+      <span>10/X</span>
+    </div>
+
+    <div class="stat">
+      <b id="nines">0</b>
+      <span>9</span>
+    </div>
+
+    <div class="stat">
+      <b id="eights">0</b>
+      <span>8</span>
+    </div>
+
+    <div class="stat">
+      <b id="avg">0.00</b>
+      <span>متوسط السهم</span>
+    </div>
+
   </div>
+
 </div>
+
+<div class="card">
+
+  <div class="card-title">
+    <h2>التحفيز والتدريب</h2>
+    <span>صوتي تفاعلي</span>
+  </div>
+
+  <div style="text-align:center;padding:8px">
+
+    <div style="font-size:38px">🎯</div>
+
+    <h3 id="coachText" style="margin:7px 0;font-weight:900">
+      ابدأ أول سهم.
+    </h3>
+
+    <p style="color:var(--muted);font-size:10px">
+      كل سهم له رد فعل وصوت إطلاق واستقرار في الهدف.
+    </p>
+
+  </div>
+
 </div>
 
 </div>
+</div>
+
 </section>
 
-<!-- HISTORY SECTION -->
-<section id="history" class="page">
+<!-- ANALYSIS PAGE -->
+
+<section id="analysis" class="page">
+
 <div class="card">
   <div class="card-title">
-    <h2>سجل النتائج</h2>
-    <button class="btn danger" onclick="clearHistory()">مسح السجل</button>
+    <h2>📊 تقرير تحليل الرماية المفصل (Post-Session Analysis)</h2>
+    <span id="analysisSessionInfo">جلسة حالية</span>
   </div>
-  <div id="historyList"></div>
+
+  <div class="stats" style="margin-bottom: 15px;">
+    <div class="stat">
+      <b id="anTotalScore">0</b>
+      <span>إجمالي النقاط</span>
+    </div>
+    <div class="stat">
+      <b id="anAvgArrow">0.0</b>
+      <span>معدل السهم</span>
+    </div>
+    <div class="stat">
+      <b id="anGoldRate">0%</b>
+      <span>نسبة الخواتم الذهبية (9-10)</span>
+    </div>
+    <div class="stat">
+      <b id="anConsistency">100%</b>
+      <span>مؤشر الثبات والدقة</span>
+    </div>
+  </div>
+
+  <div class="analysis-grid">
+
+    <div class="analysis-card">
+      <h4>🎯 مخطط تجميعة الأسهم (Grouping Center)</h4>
+      <p>يظهر مركز ثقل الرميات واتجاه ميلان السهام على الهدف:</p>
+
+      <div class="grouping-visual" id="groupingVisual">
+        <div class="axis-x"></div>
+        <div class="axis-y"></div>
+        <div class="grouping-center-dot" id="groupingCenterDot" style="top:50%; left:50%; display:none;"></div>
+      </div>
+
+      <p id="groupingText" style="text-align:center; font-weight:700; color:var(--text); margin-top:5px;">
+        لا يوجد أسهم كافية للتحليل بعد.
+      </p>
+    </div>
+
+    <div class="analysis-card">
+      <h4>💡 التوصيات والنصائح الفنية</h4>
+      <div id="analysisAdvice" style="font-size:11px; color:var(--text); line-height:1.7;">
+        قم بإطلاق الأسهم أولاً للحصول على تحليل تفصيلي وتوصيات مخصصة لتحسين أدائك.
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:15px; text-align:center;">
+    <button class="btn secondary" onclick="showPage('score', document.querySelectorAll('.nav button')[0])">العودة للسكور</button>
+  </div>
 </div>
+
 </section>
+
+<!-- ELIMINATION PAGE -->
+
+<section id="elim" class="page">
+
+<div class="card">
+
+  <div class="card-title">
+    <h2>الإقصائي التفاعلي (World Archery Match)</h2>
+    <span>3 أسهم لكل جولة · النظام الباشا (أول إلى 6 نقاط)</span>
+  </div>
+
+  <!-- MODE SELECTION TOGGLE -->
+  <div class="mode-toggle-group">
+    <button class="mode-toggle-btn active" id="elimModeBot" onclick="setElimMode('bot')">🤖 التحدي ضد الروبوت</button>
+    <button class="mode-toggle-btn" id="elimModePvp" onclick="setElimMode('pvp')">👥 ضد خصم حي / شخص آخر</button>
+  </div>
+
+  <div class="elim-players-setup">
+    <div class="field">
+      <label>اللاعب الأول (أنت)</label>
+      <input id="elimP1Name" value="عمران" onchange="renderElim()">
+    </div>
+    <div class="field">
+      <label>اللاعب الثاني / الخصم</label>
+      <input id="elimP2Name" value="الروبوت" onchange="renderElim()">
+    </div>
+  </div>
+
+  <!-- TARGET DUAL DISPLAY FOR ELIMINATION -->
+  <div class="target-wrapper">
+    <div style="font-size:11px; color:var(--muted); font-weight:700; margin-bottom:4px;" id="elimTargetLabel">
+      التصويب المباشر على الهدف لللاعب الحالي
+    </div>
+    <div class="target-container" id="elimTargetContainer">
+      <svg class="target-svg" id="elimTargetSvg" viewBox="0 0 200 200" onclick="handleElimTargetClick(event)">
+        <!-- Dynamic Target -->
+      </svg>
+      <div id="elimHolesLayer"></div>
+    </div>
+  </div>
+
+  <div class="duel">
+
+    <div class="player-box me" id="p1Box" onclick="switchElimTurn(1)">
+      <div class="player-name" id="myElimName">عمران</div>
+      <div class="match-points" id="myPoints">0</div>
+      <div class="round-score" id="myRound">—</div>
+    </div>
+
+    <div class="vs">VS</div>
+
+    <div class="player-box" id="p2Box" onclick="switchElimTurn(2)">
+      <div class="player-name" id="oppElimName">الخصم</div>
+      <div class="match-points" id="oppPoints">0</div>
+      <div class="round-score" id="oppRound">—</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:15px">
+
+    <div class="card-title">
+      <h2>تسجيل جولة الإقصائي</h2>
+      <span id="elimRoundNo">الجولة 1</span>
+    </div>
+
+    <div style="display:flex; gap:10px; margin-bottom:10px;">
+      <button class="btn secondary" id="turnBtnP1" style="flex:1;" onclick="switchElimTurn(1)">دور: <span id="turnLabelP1">عمران</span></button>
+      <button class="btn secondary" id="turnBtnP2" style="flex:1;" onclick="switchElimTurn(2)">دور: <span id="turnLabelP2">الخصم</span></button>
+    </div>
+
+    <div class="current">
+
+      <div class="arrows">
+        <div class="dot" id="e1">—</div>
+        <div class="dot" id="e2">—</div>
+        <div class="dot" id="e3">—</div>
+      </div>
+
+      <div class="current-score" id="eScore">0</div>
+
+    </div>
+
+    <div class="arrow-grid">
+
+      <button class="arrow" onclick="addElimArrow(10)">10</button>
+      <button class="arrow" onclick="addElimArrow(9)">9</button>
+      <button class="arrow" onclick="addElimArrow(8)">8</button>
+      <button class="arrow" onclick="addElimArrow(7)">7</button>
+      <button class="arrow" onclick="addElimArrow(6)">6</button>
+
+      <button class="arrow" onclick="addElimArrow(5)">5</button>
+      <button class="arrow" onclick="addElimArrow(4)">4</button>
+      <button class="arrow" onclick="addElimArrow(3)">3</button>
+      <button class="arrow" onclick="addElimArrow(2)">2</button>
+      <button class="arrow" onclick="addElimArrow(1)">1</button>
+
+      <button class="arrow" onclick="addElimArrow(0)">M</button>
+      <button class="arrow" onclick="undoElimArrow()">⌫</button>
+
+    </div>
+
+    <div class="actions" style="margin-top:12px">
+
+      <button class="btn secondary" onclick="autoFillOpponent()" id="autoOpponentBtn">
+        🤖 محاكاة رمية الروبوت
+      </button>
+
+      <button class="btn green" onclick="finishElimRound()">
+        حسم الجولة
+      </button>
+
+      <button class="btn danger" onclick="resetElim()">
+        مباراة جديدة
+      </button>
+
+    </div>
+
+    <div class="shootout" id="shootout">
+
+      <strong>🔥 كسر التعادل (Shoot-off) — سهم واحد لكل لاعب</strong>
+
+      <p>أدخل سهم اللاعب الأول ثم سهم اللاعب الثاني.</p>
+
+      <div class="actions" style="justify-content:center">
+
+        <button class="btn" onclick="shootoutArrow(10)">10</button>
+        <button class="btn" onclick="shootoutArrow(9)">9</button>
+        <button class="btn" onclick="shootoutArrow(8)">8</button>
+        <button class="btn secondary" onclick="shootoutArrow(7)">7</button>
+        <button class="btn secondary" onclick="shootoutArrow(6)">6</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="rounds" id="rounds"></div>
+
+</div>
+
+</section>
+
+<!-- LIFETIME ARROW COUNTER PAGE -->
+
+<section id="counter" class="page">
+
+<div class="card">
+
+  <div class="card-title">
+    <h2>🔢 عداد إجمالي الأسهم المرمية (Lifetime Arrow Counter)</h2>
+    <span>تتبع عدد الأسهم 누적 خلال التدريبات اليومية</span>
+  </div>
+
+  <div class="counter-hero">
+    <div style="font-size:12px; color:var(--muted); font-weight:800; margin-bottom:5px;">إجمالي الأسهم التي رمايتها حتى الآن</div>
+    <div class="counter-val" id="lifetimeCounterDisplay">0</div>
+    <div style="font-size:10px; color:var(--gold); margin-top:5px;" id="counterLevelBadge">مبتدئ · واصل التدريب!</div>
+  </div>
+
+  <div class="card-title" style="margin-top:20px;">
+    <h2>تسجيل أسهم تمرين اليوم</h2>
+  </div>
+
+  <div class="counter-input-row">
+    <input type="number" id="addArrowInput" placeholder="أدخل عدد الأسهم (مثلاً: 50)" min="1">
+    <button class="btn green" onclick="addLifetimeArrows()">إضافة للعداد +</button>
+  </div>
+
+  <div class="actions" style="margin-top:15px; justify-content:space-between;">
+    <button class="btn secondary" onclick="quickAddArrows(30)">+30 سهم</button>
+    <button class="btn secondary" onclick="quickAddArrows(60)">+60 سهم</button>
+    <button class="btn secondary" onclick="quickAddArrows(100)">+100 سهم</button>
+    <button class="btn danger" onclick="resetLifetimeCounter()">إعادة ضبط العداد</button>
+  </div>
+
+</div>
+
+</section>
+
+<!-- SETTINGS PAGE -->
+
+<section id="settings" class="page">
+
+<div class="card">
+
+  <div class="card-title">
+    <h2>الإعدادات والتخصيص</h2>
+    <span>تخصيص التجربة والبيانات</span>
+  </div>
+
+  <div class="settings-grid">
+
+    <div class="setting">
+
+      <div>
+        <b>التحفيز والأصوات</b>
+        <p>أصوات الأسهم والنغمات</p>
+      </div>
+
+      <div class="switch on" id="soundSwitch" onclick="toggleSound()">
+        <i></i>
+      </div>
+
+    </div>
+
+    <div class="setting">
+
+      <div>
+        <b>الاهتزاز</b>
+        <p>عند الأسهم المميزة والتصويب</p>
+      </div>
+
+      <div class="switch on" id="vibrateSwitch" onclick="toggleVibrate()">
+        <i></i>
+      </div>
+
+    </div>
+
+    <div class="setting">
+
+      <div>
+        <b>الوضع الليلي / النهاري</b>
+        <p>مظهر التطبيق</p>
+      </div>
+
+      <div class="switch" id="themeSwitch" onclick="toggleTheme()">
+        <i></i>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="card">
+
+  <div class="card-title">
+    <h2>سجل الجلسات والمباريات</h2>
+
+    <button class="btn danger" onclick="clearHistory()">
+      مسح السجل
+    </button>
+  </div>
+
+  <div id="historyList"></div>
+
+</div>
+
+</section>
+
+</div>
+
+<div class="motivation" id="motivation">
+
+  <div class="big" id="motIcon">🎯</div>
+
+  <h3 id="motTitle">ممتاز!</h3>
+
+  <p id="motText">استمر.</p>
 
 </div>
 
@@ -604,147 +1680,504 @@ header{
 <script>
 "use strict";
 
-let soundEnabled = true;
-let currentTheme = "dark";
+let soundEnabled=true;
+let vibrateEnabled=true;
+let isDarkMode=true;
 
-let session = {
-  arrows: [],
-  ends: [],
-  currentEnd: []
+let session={
+  arrows:[],
+  ends:[],
+  currentEnd:[],
+  arrowCoords:[] // stores {x, y, val} for visual analysis
 };
 
-const $ = id => document.getElementById(id);
+let elim={
+  mode: 'bot', // 'bot' or 'pvp'
+  p1Points:0,
+  p2Points:0,
+  round:1,
+  p1Current:[],
+  p2Current:[],
+  p1Coords:[],
+  p2Coords:[],
+  currentTurn: 1, // 1 for P1, 2 for P2
+  rounds:[],
+  finished:false,
+  shootout:false,
+  shootoutP1: null
+};
+
+let lifetimeArrowCount = 0;
+
+const $=id=>document.getElementById(id);
 
 /* =========================
-   THEME TOGGLE
+   LOCAL STORAGE & INIT
 ========================= */
-function toggleTheme() {
-  currentTheme = currentTheme === "dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", currentTheme);
-  $("themeBtn").textContent = currentTheme === "dark" ? "🌙" : "☀️";
+
+function loadSavedSettings(){
+  const saved = JSON.parse(localStorage.getItem("archerySettings") || "{}");
+  if(saved.archerName) $("archerName").value = saved.archerName;
+  if(saved.distance) $("distance").value = saved.distance;
+  if(saved.targetType) $("targetType").value = saved.targetType;
+  if(saved.arrowConfig) $("arrowCount").value = saved.arrowConfig;
+  if(saved.theme) {
+    isDarkMode = saved.theme === "dark";
+    applyTheme();
+  }
+
+  lifetimeArrowCount = parseInt(localStorage.getItem("archeryLifetimeArrows") || "0");
+  updateLifetimeDisplay();
+}
+
+function saveSettingsLocally(){
+  const settings = {
+    archerName: $("archerName").value,
+    distance: $("distance").value,
+    targetType: $("targetType").value,
+    arrowConfig: $("arrowCount").value,
+    theme: isDarkMode ? "dark" : "light"
+  };
+  localStorage.setItem("archerySettings", JSON.stringify(settings));
 }
 
 /* =========================
-   TARGET RENDERING (10 vs 6 RINGS)
+   NAVIGATION & THEME
 ========================= */
-function renderTarget() {
-  const type = $("targetType").value;
-  const wrapper = $("targetWrapper");
 
-  if (type === "10") {
-    // 10-Ring Target SVG
-    wrapper.innerHTML = `
-      <svg class="target-svg" viewBox="0 0 400 400">
-        <!-- White Rings (1 & 2) -->
-        <circle class="target-ring" cx="200" cy="200" r="190" fill="#ffffff" stroke="#000" stroke-width="1.5" onclick="addArrow(1)"/>
-        <circle class="target-ring" cx="200" cy="200" r="171" fill="#ffffff" stroke="#000" stroke-width="1.5" onclick="addArrow(2)"/>
-        <!-- Black Rings (3 & 4) -->
-        <circle class="target-ring" cx="200" cy="200" r="152" fill="#1e293b" stroke="#fff" stroke-width="1" onclick="addArrow(3)"/>
-        <circle class="target-ring" cx="200" cy="200" r="133" fill="#1e293b" stroke="#fff" stroke-width="1" onclick="addArrow(4)"/>
-        <!-- Blue Rings (5 & 6) -->
-        <circle class="target-ring" cx="200" cy="200" r="114" fill="#0099ff" stroke="#000" stroke-width="1" onclick="addArrow(5)"/>
-        <circle class="target-ring" cx="200" cy="200" r="95" stroke="#000" stroke-width="1" fill="#0099ff" onclick="addArrow(6)"/>
-        <!-- Red Rings (7 & 8) -->
-        <circle class="target-ring" cx="200" cy="200" r="76" fill="#ff334b" stroke="#000" stroke-width="1" onclick="addArrow(7)"/>
-        <circle class="target-ring" cx="200" cy="200" r="57" fill="#ff334b" stroke="#000" stroke-width="1" onclick="addArrow(8)"/>
-        <!-- Gold Rings (9 & 10) -->
-        <circle class="target-ring" cx="200" cy="200" r="38" fill="#ffd700" stroke="#000" stroke-width="1" onclick="addArrow(9)"/>
-        <circle class="target-ring" cx="200" cy="200" r="19" fill="#ffd700" stroke="#000" stroke-width="1" onclick="addArrow(10)"/>
-        <!-- X Center Inner Ring -->
-        <circle cx="200" cy="200" r="9.5" fill="none" stroke="#000" stroke-width="1" pointer-events="none"/>
-        <path d="M 195 200 L 205 200 M 200 195 L 200 205" stroke="#000" stroke-width="1" pointer-events="none"/>
-      </svg>
-    `;
+function showPage(id,btn){
+
+  document.querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
+
+  $(id).classList.add("active");
+
+  document.querySelectorAll(".nav button")
+    .forEach(b=>b.classList.remove("active"));
+
+  if(btn) btn.classList.add("active");
+
+  if(id === "analysis") {
+    renderAnalysisPage();
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+function toggleTheme(){
+  isDarkMode = !isDarkMode;
+  applyTheme();
+  saveSettingsLocally();
+}
+
+function applyTheme(){
+  if(isDarkMode){
+    document.documentElement.removeAttribute("data-theme");
+    $("themeBtn").textContent = "🌙";
+    $("themeSwitch").classList.remove("on");
   } else {
-    // 6-Ring Center Target SVG (5 to 10)
-    wrapper.innerHTML = `
-      <svg class="target-svg" viewBox="0 0 300 300">
-        <!-- Background outer frame for Miss zone -->
-        <rect x="0" y="0" width="300" height="300" fill="none"/>
-        <!-- Blue Ring (5 & 6) -->
-        <circle class="target-ring" cx="150" cy="150" r="140" fill="#0099ff" stroke="#000" stroke-width="2" onclick="addArrow(5)"/>
-        <circle class="target-ring" cx="150" cy="150" r="116" fill="#0099ff" stroke="#000" stroke-width="1.5" onclick="addArrow(6)"/>
-        <!-- Red Rings (7 & 8) -->
-        <circle class="target-ring" cx="150" cy="150" r="93" fill="#ff334b" stroke="#000" stroke-width="1.5" onclick="addArrow(7)"/>
-        <circle class="target-ring" cx="150" cy="150" r="70" fill="#ff334b" stroke="#000" stroke-width="1.5" onclick="addArrow(8)"/>
-        <!-- Gold Rings (9 & 10) -->
-        <circle class="target-ring" cx="150" cy="150" r="46" fill="#ffd700" stroke="#000" stroke-width="1.5" onclick="addArrow(9)"/>
-        <circle class="target-ring" cx="150" cy="150" r="23" fill="#ffd700" stroke="#000" stroke-width="1.5" onclick="addArrow(10)"/>
-        <!-- X Center -->
-        <circle cx="150" cy="150" r="11.5" fill="none" stroke="#000" stroke-width="1" pointer-events="none"/>
-        <path d="M 145 150 L 155 150 M 150 145 L 150 155" stroke="#000" stroke-width="1" pointer-events="none"/>
-      </svg>
-    `;
+    document.documentElement.setAttribute("data-theme", "light");
+    $("themeBtn").textContent = "☀️";
+    $("themeSwitch").classList.add("on");
   }
 }
 
 /* =========================
-   NAVIGATION & UTILS
+   AUDIO & SYNTHESIS (REALISTIC ARROW SOUNDS)
 ========================= */
-function showPage(id, btn) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  $(id).classList.add("active");
-  document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
+
+function toggleSound(){
+  soundEnabled=!soundEnabled;
+  $("soundSwitch").classList.toggle("on",soundEnabled);
+  $("soundBtn").textContent=soundEnabled?"🔊":"🔇";
+  if(soundEnabled) playTone("success");
 }
 
-function toggleSound() {
-  soundEnabled = !soundEnabled;
-  $("soundBtn").textContent = soundEnabled ? "🔊" : "🔇";
+function toggleVibrate(){
+  vibrateEnabled=!vibrateEnabled;
+  $("vibrateSwitch").classList.toggle("on",vibrateEnabled);
 }
 
-let audioCtx = null;
-function playTone(freq, duration = 0.15) {
-  if (!soundEnabled) return;
-  try {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    o.frequency.value = freq;
-    g.gain.setValueAtTime(0.05, audioCtx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-    o.connect(g); g.connect(audioCtx.destination);
-    o.start(); o.stop(audioCtx.currentTime + duration);
-  } catch(e) {}
+let audioCtx=null;
+
+function getAudioContext(){
+  if(!audioCtx){
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if(audioCtx.state === 'suspended'){
+    audioCtx.resume();
+  }
+  return audioCtx;
+}
+
+function tone(freq, duration, type="sine", volume=.055, delay=0){
+  if(!soundEnabled)return;
+  try{
+    const ctx = getAudioContext();
+    const o=ctx.createOscillator();
+    const g=ctx.createGain();
+
+    o.type=type;
+    o.frequency.setValueAtTime(freq, ctx.currentTime+delay);
+
+    g.gain.setValueAtTime(0, ctx.currentTime+delay);
+    g.gain.linearRampToValueAtTime(volume, ctx.currentTime+delay+.015);
+    g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime+delay+duration);
+
+    o.connect(g);
+    g.connect(ctx.destination);
+
+    o.start(ctx.currentTime+delay);
+    o.stop(ctx.currentTime+delay+duration+.03);
+  }catch(e){}
+}
+
+function playArrowSound(scoreVal){
+  if(!soundEnabled) return;
+  try{
+    const ctx = getAudioContext();
+
+    // 1. Bow String Swoosh / Release Sound
+    const bufferSize = ctx.sampleRate * 0.12;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(800, ctx.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.1);
+
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.15, ctx.currentTime);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+
+    noise.connect(filter);
+    filter.connect(noiseGain);
+    noiseGain.connect(ctx.destination);
+    noise.start(ctx.currentTime);
+
+    // 2. Target Hit Impact (Thud)
+    setTimeout(() => {
+      const thud = ctx.createOscillator();
+      const thudGain = ctx.createGain();
+
+      thud.type = 'triangle';
+      thud.frequency.setValueAtTime(scoreVal === 10 ? 180 : 120, ctx.currentTime);
+      thud.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.08);
+
+      thudGain.gain.setValueAtTime( scoreVal === 10 ? 0.3 : 0.2, ctx.currentTime);
+      thudGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+
+      thud.connect(thudGain);
+      thudGain.connect(ctx.destination);
+
+      thud.start(ctx.currentTime);
+      thud.stop(ctx.currentTime + 0.09);
+
+      if(scoreVal >= 9) {
+        playTone(scoreVal === 10 ? "ten" : "nine");
+      }
+    }, 70);
+
+  }catch(e){}
+}
+
+function playTone(kind){
+  if(!soundEnabled)return;
+  const patterns={
+    ten:()=>{ tone(660,.12,"sine",.06); tone(880,.18,"sine",.06,.08); tone(1100,.25,"sine",.05,.18); },
+    nine:()=>{ tone(620,.13,"sine",.05); tone(780,.18,"sine",.05,.1); },
+    good:()=>{ tone(520,.15,"sine",.05); tone(700,.22,"sine",.05,.1); },
+    low:()=>{ tone(330,.2,"sine",.035); },
+    success:()=>{ tone(520,.12); tone(660,.14,"sine",.055,.1); tone(880,.28,"sine",.06,.21); },
+    victory:()=>{ tone(523,.12); tone(659,.12,"sine",.06,.12); tone(784,.16,"sine",.06,.24); tone(1047,.4,"sine",.07,.38); },
+    tension:()=>{ tone(300,.16,"triangle",.04); tone(360,.2,"triangle",.04,.17); }
+  };
+  if(patterns[kind]) patterns[kind]();
+}
+
+/* =========================
+   FEEDBACK & MOTIVATION
+========================= */
+
+function feedback(value){
+  if(vibrateEnabled && navigator.vibrate){
+    navigator.vibrate(value>=10 ? [35,25,55] : value>=9 ? [25] : [15]);
+  }
+
+  playArrowSound(value);
+
+  if(value===10){
+    motivate("🎯", "عشرة كاملة!", "سهم ممتاز في منتصف الهدف.");
+  }else if(value===9){
+    motivate("🔥", "ممتاز!", "حافظ على الثبات والإيقاع.");
+  }else if(value>=8){
+    motivate("✓", "جيد جدًا", "استمر بالتركيز على السهم التالي.");
+  }else if(value>=6){
+    motivate("🧠", "سهم متوسط", "عدّل التوزين وحافظ على هدوئك.");
+  }else{
+    motivate("🎯", "أعد الضبط", "ركز في السهم القادم.");
+  }
+}
+
+function motivate(icon,title,text){
+  $("motIcon").textContent=icon;
+  $("motTitle").textContent=title;
+  $("motText").textContent=text;
+
+  $("motivation").classList.add("show");
+  clearTimeout(window.motTimer);
+  window.motTimer=setTimeout(()=>$("motivation").classList.remove("show"), 1800);
+  $("coachText").textContent= title+" — "+text;
+}
+
+/* =========================
+   TARGET DISPLAY & HOLES SYSTEM
+========================= */
+
+const RINGS_FULL = [
+  { val: 10, r: 10, color: '#ffd700', stroke: '#d4af37' },
+  { val: 10, r: 20, color: '#ffd700', stroke: '#d4af37' },
+  { val: 9,  r: 35, color: '#ffd700', stroke: '#d4af37' },
+  { val: 8,  r: 50, color: '#f44336', stroke: '#c62828' },
+  { val: 7,  r: 65, color: '#f44336', stroke: '#c62828' },
+  { val: 6,  r: 80, color: '#2196f3', stroke: '#1565c0' },
+  { val: 5,  r: 95, color: '#2196f3', stroke: '#1565c0' },
+  { val: 4,  r: 110, color: '#212121', stroke: '#424242' },
+  { val: 3,  r: 125, color: '#212121', stroke: '#424242' },
+  { val: 2,  r: 140, color: '#ffffff', stroke: '#e0e0e0' },
+  { val: 1,  r: 155, color: '#ffffff', stroke: '#e0e0e0' }
+];
+
+const RINGS_6 = [
+  { val: 10, r: 18, color: '#ffd700', stroke: '#d4af37' },
+  { val: 10, r: 36, color: '#ffd700', stroke: '#d4af37' },
+  { val: 9,  r: 65, color: '#ffd700', stroke: '#d4af37' },
+  { val: 8,  r: 95, color: '#f44336', stroke: '#c62828' },
+  { val: 7,  r: 125, color: '#f44336', stroke: '#c62828' },
+  { val: 6,  r: 155, color: '#2196f3', stroke: '#1565c0' }
+];
+
+function drawTargetSvg(svgId = "targetSvg"){
+  const type = $("targetType").value;
+  const rings = type === "6" ? RINGS_6 : RINGS_FULL;
+  const svg = $(svgId);
+  if(!svg) return;
+
+  let html = `<circle cx="100" cy="100" r="98" fill="#1e293b" stroke="var(--line)" stroke-width="2"/>`;
+
+  for(let i = rings.length - 1; i >= 0; i--){
+    const ring = rings[i];
+    const scaledR = (ring.r / 155) * 94;
+    html += `<circle cx="100" cy="100" r="${scaledR}" fill="${ring.color}" stroke="${ring.stroke}" stroke-width="1"/>`;
+  }
+  
+  html += `<line x1="96" y1="100" x2="104" y2="100" stroke="#000" stroke-width="1"/>`;
+  html += `<line x1="100" y1="96" x2="100" y2="104" stroke="#000" stroke-width="1"/>`;
+
+  svg.innerHTML = html;
+}
+
+function handleTargetClick(e){
+  const targetConfig = getArrowConfig();
+  if(session.ends.length >= targetConfig.maxEnds || session.currentEnd.length >= targetConfig.perEnd) return;
+
+  const rect = $("targetSvg").getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const clickY = e.clientY - rect.top;
+
+  const scale = 200 / rect.width;
+  const svgX = clickX * scale;
+  const svgY = clickY * scale;
+
+  const dx = svgX - 100;
+  const dy = svgY - 100;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+
+  const type = $("targetType").value;
+  const rings = type === "6" ? RINGS_6 : RINGS_FULL;
+
+  let val = 0;
+  for(let ring of rings){
+    const scaledR = (ring.r / 155) * 94;
+    if(dist <= scaledR){
+      val = ring.val;
+      break;
+    }
+  }
+
+  const pctX = (clickX / rect.width) * 100;
+  const pctY = (clickY / rect.height) * 100;
+
+  addArrow(val, false, { x: pctX, y: pctY });
+}
+
+function renderArrowHoles(){
+  const layer = $("holesLayer");
+  if(!layer) return;
+  layer.innerHTML = "";
+  
+  session.arrowCoords.forEach((hole) => {
+    const el = document.createElement("div");
+    el.className = "hole-mark";
+    el.style.left = hole.x + "%";
+    el.style.top = hole.y + "%";
+    el.setAttribute("data-val", hole.val);
+    layer.appendChild(el);
+  });
 }
 
 /* =========================
    SCORE LOGIC
 ========================= */
-function maxEnds() { return Number($("arrowCount").value) / 6; }
 
-function addArrow(value, miss = false) {
-  if (session.ends.length >= maxEnds() || session.currentEnd.length >= 6) return;
+function getArrowConfig(){
+  const val = $("arrowCount").value.split("-");
+  const totalArrows = parseInt(val[0]);
+  const perEnd = parseInt(val[1]);
+  return {
+    totalArrows,
+    perEnd,
+    maxEnds: totalArrows / perEnd
+  };
+}
 
-  const scoreVal = miss ? 0 : value;
-  session.currentEnd.push(scoreVal);
-  session.arrows.push(scoreVal);
+function onArrowConfigChange(){
+  saveSettingsLocally();
+  resetSession();
+}
 
-  if (scoreVal === 10) playTone(880, 0.2);
-  else if (scoreVal >= 8) playTone(660, 0.15);
-  else playTone(440, 0.12);
+function onTargetTypeChange(){
+  drawTargetSvg("targetSvg");
+  drawTargetSvg("elimTargetSvg");
+  renderArrowButtons();
+  saveSettingsLocally();
+}
+
+function resetSession(){
+  session = { arrows: [], ends: [], currentEnd: [], arrowCoords: [] };
+  renderDots();
+  renderEnds();
+  renderCurrentEnd();
+  renderArrowHoles();
+  updateScore();
+}
+
+function renderDots(){
+  const config = getArrowConfig();
+  const container = $("dotsContainer");
+  container.innerHTML = "";
+  for(let i=0; i<config.perEnd; i++){
+    const dot = document.createElement("div");
+    dot.className = "dot";
+    dot.id = "a" + (i + 1);
+    dot.textContent = "—";
+    container.appendChild(dot);
+  }
+}
+
+function renderArrowButtons(){
+  const type = $("targetType").value;
+  const grid = $("arrowButtonsGrid");
+  let html = "";
+
+  if(type === "6"){
+    html += `<button class="arrow" data-v="10" onclick="addArrow(10)">10</button>`;
+    html += `<button class="arrow" data-v="9" onclick="addArrow(9)">9</button>`;
+    html += `<button class="arrow" data-v="8" onclick="addArrow(8)">8</button>`;
+    html += `<button class="arrow" data-v="7" onclick="addArrow(7)">7</button>`;
+    html += `<button class="arrow" data-v="6" onclick="addArrow(6)">6</button>`;
+    html += `<button class="arrow" data-v="M" onclick="addArrow(0,true)">M</button>`;
+    html += `<button class="arrow" onclick="undoArrow()">⌫</button>`;
+  } else {
+    html += `<button class="arrow" data-v="10" onclick="addArrow(10)">10</button>`;
+    html += `<button class="arrow" data-v="9" onclick="addArrow(9)">9</button>`;
+    html += `<button class="arrow" data-v="8" onclick="addArrow(8)">8</button>`;
+    html += `<button class="arrow" data-v="7" onclick="addArrow(7)">7</button>`;
+    html += `<button class="arrow" data-v="6" onclick="addArrow(6)">6</button>`;
+    html += `<button class="arrow" data-v="5" onclick="addArrow(5)">5</button>`;
+    html += `<button class="arrow" data-v="4" onclick="addArrow(4)">4</button>`;
+    html += `<button class="arrow" data-v="3" onclick="addArrow(3)">3</button>`;
+    html += `<button class="arrow" data-v="2" onclick="addArrow(2)">2</button>`;
+    html += `<button class="arrow" data-v="1" onclick="addArrow(1)">1</button>`;
+    html += `<button class="arrow" data-v="0" onclick="addArrow(0)">0</button>`;
+    html += `<button class="arrow" data-v="M" onclick="addArrow(0,true)">M</button>`;
+    html += `<button class="arrow" onclick="undoArrow()">⌫</button>`;
+  }
+
+  grid.innerHTML = html;
+}
+
+function addArrow(value, miss=false, coord=null){
+  const config = getArrowConfig();
+  if(session.ends.length >= config.maxEnds) return;
+  if(session.currentEnd.length >= config.perEnd) return;
+
+  const arrowVal = miss ? 0 : value;
+
+  session.currentEnd.push(arrowVal);
+  session.arrows.push(arrowVal);
+
+  if(coord){
+    session.arrowCoords.push({ x: coord.x, y: coord.y, val: arrowVal });
+  } else {
+    session.arrowCoords.push(approximateCoordForVal(arrowVal));
+  }
 
   renderCurrentEnd();
+  renderArrowHoles();
   updateScore();
 
-  if (session.currentEnd.length === 6) {
-    setTimeout(commitEnd, 300);
+  feedback(arrowVal);
+
+  if(session.currentEnd.length === config.perEnd){
+    setTimeout(commitEnd, 400);
   }
 }
 
-function renderCurrentEnd() {
-  for (let i = 0; i < 6; i++) {
-    $("a" + (i + 1)).textContent = session.currentEnd[i] ?? "—";
-  }
-  $("currentEndScore").textContent = session.currentEnd.reduce((a, b) => a + b, 0);
-  const next = Math.min(session.currentEnd.length + 1, 6);
-  $("endLabel").textContent = `الجولة ${session.ends.length + 1} · السهم ${next}/6`;
+function approximateCoordForVal(val){
+  const rings = $("targetType").value === "6" ? RINGS_6 : RINGS_FULL;
+  let targetRing = rings.find(r => r.val === val);
+  let radius = targetRing ? (targetRing.r / 155) * 45 : 48;
+  let angle = Math.random() * Math.PI * 2;
+  let r = Math.random() * radius * 0.8;
+  let x = 50 + (r * Math.cos(angle));
+  let y = 50 + (r * Math.sin(angle));
+  return { x, y, val };
 }
 
-function commitEnd() {
-  if (session.currentEnd.length !== 6) return;
+function renderCurrentEnd(){
+  const config = getArrowConfig();
+
+  for(let i=0; i<config.perEnd; i++){
+    const el = $("a" + (i + 1));
+    if(el){
+      el.textContent = session.currentEnd[i] ?? "—";
+    }
+  }
+
+  $("currentEndScore").textContent = session.currentEnd.reduce((a,b)=>a+b, 0);
+
+  const next = Math.min(session.currentEnd.length + 1, config.perEnd);
+  $("endLabel").textContent = `الجولة ${session.ends.length + 1} · السهم ${next}/${config.perEnd}`;
+  $("setupInfoHint").textContent = `${config.perEnd} أسهم لكل جولة`;
+}
+
+function commitEnd(){
+  const config = getArrowConfig();
+  if(session.currentEnd.length !== config.perEnd) return;
+
   const vals = [...session.currentEnd];
-  const score = vals.reduce((a, b) => a + b, 0);
+  const score = vals.reduce((a,b)=>a+b, 0);
 
   session.ends.push({ values: vals, score });
   session.currentEnd = [];
@@ -752,104 +2185,655 @@ function commitEnd() {
   renderEnds();
   renderCurrentEnd();
   updateScore();
+
+  const maxEndPossible = config.perEnd * 10;
+  if(score >= maxEndPossible * 0.9){
+    playTone("success");
+    motivate("🔥", "جولة ممتازة!", `${score}/${maxEndPossible} — أداء رائع.`);
+  }else{
+    motivate("🎯", `${score}/${maxEndPossible}`, "انتقل للجولة التالية بنفس الهدوء.");
+  }
 }
 
-function undoArrow() {
-  if (!session.currentEnd.length) return;
+function undoArrow(){
+  if(!session.currentEnd.length) return;
   session.currentEnd.pop();
   session.arrows.pop();
+  session.arrowCoords.pop();
+
   renderCurrentEnd();
+  renderArrowHoles();
   updateScore();
 }
 
-function clearCurrentEnd() {
-  session.arrows.splice(session.arrows.length - session.currentEnd.length);
+function clearCurrentEnd(){
+  const count = session.currentEnd.length;
+  session.arrows.splice(session.arrows.length - count);
+  session.arrowCoords.splice(session.arrowCoords.length - count);
   session.currentEnd = [];
+
   renderCurrentEnd();
+  renderArrowHoles();
   updateScore();
 }
 
-function renderEnds() {
-  $("endCount").textContent = `${session.ends.length} / ${maxEnds()}`;
-  $("ends").innerHTML = session.ends.map((e, i) => `
+function renderEnds(){
+  const config = getArrowConfig();
+  $("endCount").textContent = `${session.ends.length} / ${config.maxEnds}`;
+
+  $("ends").innerHTML = session.ends.map((e,i)=>`
     <div class="end">
-      <strong>جولة ${i + 1}</strong>
+      <strong>جولة ${i+1}</strong>
       <b>${e.score}</b>
-      <div style="font-size:10px; color:var(--muted)">${e.values.join(" · ")}</div>
+      <div>${e.values.join(" · ")}</div>
     </div>
   `).join("");
 }
 
-function updateScore() {
-  const total = session.arrows.reduce((a, b) => a + b, 0);
-  const max = Number($("arrowCount").value) * 10;
+function updateScore(){
+  const total = session.arrows.reduce((a,b)=>a+b, 0);
+  const config = getArrowConfig();
+  const max = config.totalArrows * 10;
 
   $("total").innerHTML = `${total}<small>/${max}</small>`;
-  $("percent").textContent = (total / max * 100).toFixed(1) + "%";
+  $("percent").textContent = ((total / max) * 100).toFixed(1) + "%";
 
   $("tens").textContent = session.arrows.filter(x => x === 10).length;
   $("nines").textContent = session.arrows.filter(x => x === 9).length;
   $("eights").textContent = session.arrows.filter(x => x === 8).length;
-  $("avg").textContent = session.arrows.length ? (total / session.arrows.length).toFixed(2) : "0.00";
+
+  $("avg").textContent = session.arrows.length 
+    ? (total / session.arrows.length).toFixed(2)
+    : "0.00";
 }
 
-function finishSession() {
-  if (!session.arrows.length) return;
-  const total = session.arrows.reduce((a, b) => a + b, 0);
-  const max = Number($("arrowCount").value) * 10;
-
-  saveHistory({
-    name: $("archerName").value || "عمران",
-    date: new Date().toLocaleString("ar-EG"),
-    total, max,
-    percent: (total / max * 100).toFixed(1)
-  });
-
-  toast("تم حفظ الجولة بنجاح!");
-}
-
-function saveHistory(item) {
-  const h = JSON.parse(localStorage.getItem("archeryHistory") || "[]");
-  h.unshift(item);
-  localStorage.setItem("archeryHistory", JSON.stringify(h.slice(0, 30)));
-  renderHistory();
-}
-
-function renderHistory() {
-  const h = JSON.parse(localStorage.getItem("archeryHistory") || "[]");
-  if (!h.length) {
-    $("historyList").innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted)">لا توجد نتائج مسجلة.</div>';
+function finishSession(){
+  if(!session.arrows.length){
+    toast("أدخل الأسهم أولًا.");
     return;
   }
-  $("historyList").innerHTML = h.map(x => `
-    <div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid var(--line)">
-      <div><b>${x.name}</b><br><small style="color:var(--muted)">${x.date}</small></div>
-      <div style="text-align:left"><b style="color:var(--gold); font-size:18px">${x.total}/${x.max}</b><br><small>${x.percent}%</small></div>
+
+  const config = getArrowConfig();
+  const total = session.arrows.reduce((a,b)=>a+b, 0);
+  const max = config.totalArrows * 10;
+
+  const item = {
+    type: "score",
+    name: $("archerName").value || "عمران",
+    distance: $("distance").value || "40m",
+    date: new Date().toLocaleString("ar-EG"),
+    total,
+    max,
+    percent: ((total / max) * 100).toFixed(1),
+    tens: session.arrows.filter(x => x === 10).length,
+    nines: session.arrows.filter(x => x === 9).length,
+    eights: session.arrows.filter(x => x === 8).length
+  };
+
+  saveHistory(item);
+
+  // Automatically add session arrows to lifetime counter
+  lifetimeArrowCount += session.arrows.length;
+  localStorage.setItem("archeryLifetimeArrows", lifetimeArrowCount);
+  updateLifetimeDisplay();
+
+  playTone(total >= max * 0.88 ? "victory" : "success");
+  motivate("🏆", "تم حفظ الجلسة والتحليل!", `المجموع: ${total} / ${max}`);
+
+  // Open Analysis page
+  openAnalysisPage();
+}
+
+/* =========================
+   POST-SESSION ANALYSIS LOGIC
+========================= */
+
+function openAnalysisPage(){
+  const btn = document.querySelectorAll('.nav button')[1];
+  showPage('analysis', btn);
+}
+
+function renderAnalysisPage(){
+  const total = session.arrows.reduce((a,b)=>a+b, 0);
+  const count = session.arrows.length;
+  const config = getArrowConfig();
+
+  $("anTotalScore").textContent = `${total} / ${config.totalArrows * 10}`;
+  $("anAvgArrow").textContent = count ? (total / count).toFixed(2) : "0.00";
+
+  const golds = session.arrows.filter(v => v >= 9).length;
+  const goldRate = count ? ((golds / count) * 100).toFixed(1) : 0;
+  $("anGoldRate").textContent = goldRate + "%";
+
+  // Consistency score calculation (variance)
+  let consistency = 100;
+  if(count > 1){
+    const avg = total / count;
+    const variance = session.arrows.reduce((acc, val) => acc + Math.pow(val - avg, 2), 0) / count;
+    consistency = Math.max(40, Math.min(100, (100 - variance * 8))).toFixed(0);
+  }
+  $("anConsistency").textContent = consistency + "%";
+
+  // Grouping Analysis Visual Calculation
+  const visual = $("groupingVisual");
+  visual.querySelectorAll(".grouping-dot").forEach(el => el.remove());
+
+  if(session.arrowCoords.length > 0){
+    let avgX = 0, avgY = 0;
+    session.arrowCoords.forEach(c => {
+      avgX += c.x;
+      avgY += c.y;
+
+      const dot = document.createElement("div");
+      dot.className = "grouping-dot";
+      dot.style.left = c.x + "%";
+      dot.style.top = c.y + "%";
+      visual.appendChild(dot);
+    });
+
+    avgX /= session.arrowCoords.length;
+    avgY /= session.arrowCoords.length;
+
+    const centerDot = $("groupingCenterDot");
+    centerDot.style.left = avgX + "%";
+    centerDot.style.top = avgY + "%";
+    centerDot.style.display = "block";
+
+    // Quadrant Analysis
+    let dir = "";
+    if(avgY < 45) dir += "أعلى ";
+    else if(avgY > 55) dir += "أسفل ";
+
+    if(avgX > 55) dir += "يمين";
+    else if(avgX < 45) dir += "يسار";
+
+    if(!dir) dir = "منتصف الهدف (تجميع ممتاز)";
+    else dir = "يميل نحو: " + dir;
+
+    $("groupingText").textContent = `مركز ثقل الرميات: ${dir}`;
+
+    // Generate Advice based on data
+    let advice = "";
+    if(goldRate >= 70){
+      advice += "• <b>أداء أبطال:</b> معدل الرمي في الخواتم الذهبية رائع، حافظ على هدوء التنفس ومتابعة السهم (Follow-through).<br>";
+    } else if(goldRate >= 40){
+      advice += "• <b>أداء جيد جداً:</b> حاول التركيز على تثبيت نقطة التثبيت (Anchor point) أسفل الذقن لتفادي الشتات.<br>";
+    } else {
+      advice += "• <b>تحتاج ضبط التوزين:</b> ركز على مراجعة فتحة النظر (Peep sight) وضبط وقفة الجسم بالكامل قبل الإفلات.<br>";
+    }
+
+    if(avgY < 45) advice += "• <b>ملاحظة ارتفاع:</b> الأسهم تميل للأعلى، تحقق من مسكة القوس أو زيادة قوة الإفلات.<br>";
+    if(avgY > 55) advice += "• <b>ملاحظة انخفاض:</b> الأسهم تميل لأسفل، انتبه لهبوط ذراع القوس أثناء الإفلات.<br>";
+    if(avgX > 55) advice += "• <b>ملاحظة يمين:</b> انتبه لدفع ذراع القوس لليمين أو زيادة ضغط الإبهام.<br>";
+    if(avgX < 45) advice += "• <b>ملاحظة يسار:</b> تحقق من مرونة الإفلات وعدم سحب الوتر للخارج.<br>";
+
+    $("analysisAdvice").innerHTML = advice;
+  } else {
+    $("groupingCenterDot").style.display = "none";
+    $("groupingText").textContent = "قم بإطلاق الأسهم أولاً للتحليل.";
+    $("analysisAdvice").innerHTML = "لا توجد أسهم مسجلة في هذه الجلسة حتى الآن.";
+  }
+}
+
+/* =========================
+   ELIMINATION LOGIC (BOT VS PVP & HOLES)
+========================= */
+
+function setElimMode(mode){
+  elim.mode = mode;
+  $("elimModeBot").classList.toggle("active", mode === 'bot');
+  $("elimModePvp").classList.toggle("active", mode === 'pvp');
+
+  if(mode === 'bot'){
+    $("elimP2Name").value = "الروبوت الذكي";
+    $("autoOpponentBtn").style.display = "inline-flex";
+  } else {
+    $("elimP2Name").value = "اللاعب 2";
+    $("autoOpponentBtn").style.display = "none";
+  }
+  renderElim();
+}
+
+function switchElimTurn(playerNum){
+  if(elim.finished) return;
+  elim.currentTurn = playerNum;
+  renderElim();
+}
+
+function resetElim(){
+  elim = {
+    mode: elim.mode,
+    p1Points: 0,
+    p2Points: 0,
+    round: 1,
+    p1Current: [],
+    p2Current: [],
+    p1Coords: [],
+    p2Coords: [],
+    currentTurn: 1,
+    rounds: [],
+    finished: false,
+    shootout: false,
+    shootoutP1: null
+  };
+
+  $("shootout").classList.remove("show");
+  renderElim();
+  renderElimArrowHoles();
+  toast("بدأت مباراة إقصائي جديدة.");
+}
+
+function handleElimTargetClick(e){
+  if(elim.finished) return;
+  const targetArr = elim.currentTurn === 1 ? elim.p1Current : elim.p2Current;
+  if(targetArr.length >= 3) return;
+
+  const rect = $("elimTargetSvg").getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const clickY = e.clientY - rect.top;
+
+  const scale = 200 / rect.width;
+  const svgX = clickX * scale;
+  const svgY = clickY * scale;
+
+  const dx = svgX - 100;
+  const dy = svgY - 100;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+
+  const type = $("targetType").value;
+  const rings = type === "6" ? RINGS_6 : RINGS_FULL;
+
+  let val = 0;
+  for(let ring of rings){
+    const scaledR = (ring.r / 155) * 94;
+    if(dist <= scaledR){
+      val = ring.val;
+      break;
+    }
+  }
+
+  const pctX = (clickX / rect.width) * 100;
+  const pctY = (clickY / rect.height) * 100;
+
+  addElimArrow(val, { x: pctX, y: pctY });
+}
+
+function addElimArrow(v, coord=null){
+  if(elim.finished) return;
+
+  if(elim.shootout){
+    shootoutArrow(v);
+    return;
+  }
+
+  const targetArr = elim.currentTurn === 1 ? elim.p1Current : elim.p2Current;
+  const targetCoords = elim.currentTurn === 1 ? elim.p1Coords : elim.p2Coords;
+
+  if(targetArr.length >= 3) {
+    toast("اكتملت الأسهم الثلاثة لهذا اللاعب.");
+    return;
+  }
+
+  targetArr.push(v);
+  if(coord) targetCoords.push({ ...coord, val: v, player: elim.currentTurn });
+  else targetCoords.push({ ...approximateCoordForVal(v), val: v, player: elim.currentTurn });
+
+  feedback(v);
+
+  // Switch turn automatically if playing vs Human or Bot
+  if(elim.p1Current.length === 3 && elim.p2Current.length < 3){
+    elim.currentTurn = 2;
+    if(elim.mode === 'bot'){
+      setTimeout(autoFillOpponent, 400);
+    }
+  }
+
+  renderElim();
+  renderElimArrowHoles();
+}
+
+function renderElimArrowHoles(){
+  const layer = $("elimHolesLayer");
+  if(!layer) return;
+  layer.innerHTML = "";
+
+  const allHoles = [...elim.p1Coords, ...elim.p2Coords];
+  allHoles.forEach(hole => {
+    const el = document.createElement("div");
+    el.className = `hole-mark ${hole.player === 1 ? 'p1-hole' : 'p2-hole'}`;
+    el.style.left = hole.x + "%";
+    el.style.top = hole.y + "%";
+    el.setAttribute("data-val", hole.val);
+    layer.appendChild(el);
+  });
+}
+
+function undoElimArrow(){
+  const targetArr = elim.currentTurn === 1 ? elim.p1Current : elim.p2Current;
+  const targetCoords = elim.currentTurn === 1 ? elim.p1Coords : elim.p2Coords;
+
+  if(targetArr.length){
+    targetArr.pop();
+    targetCoords.pop();
+    renderElim();
+    renderElimArrowHoles();
+  }
+}
+
+function autoFillOpponent(){
+  if(elim.p1Current.length !== 3){
+    toast("أدخل أسهم اللاعب الأول الثلاثة أولاً.");
+    return;
+  }
+
+  const p1Total = elim.p1Current.reduce((a,b)=>a+b, 0);
+  let base;
+  const roll = Math.random();
+
+  if(p1Total >= 29) base = roll < 0.2 ? 30 : roll < 0.6 ? 29 : 28;
+  else if(p1Total >= 26) base = roll < 0.2 ? 29 : roll < 0.7 ? 27 : 26;
+  else base = roll < 0.3 ? 27 : 25;
+
+  const arrows = makeThreeArrowScore(base);
+  elim.p2Current = arrows;
+  elim.p2Coords = arrows.map(v => ({ ...approximateCoordForVal(v), player: 2 }));
+  elim.currentTurn = 1;
+
+  renderElim();
+  renderElimArrowHoles();
+  motivate("⚔️", "قام الروبوت بالإطلاق!", "اضغط حسم الجولة.");
+}
+
+function makeThreeArrowScore(total){
+  const patterns = {
+    30:[[10,10,10]],
+    29:[[10,10,9],[10,9,10],[9,10,10]],
+    28:[[10,9,9],[9,10,9],[9,9,10]],
+    27:[[9,9,9],[10,9,8]],
+    26:[[10,8,8],[9,9,8]],
+    25:[[9,8,8],[10,8,7]],
+    24:[[8,8,8],[9,8,7]]
+  };
+  const p = patterns[total] || [[Math.floor(total/3), Math.floor(total/3), total - 2*Math.floor(total/3)]];
+  return [...p[Math.floor(Math.random()*p.length)]];
+}
+
+function finishElimRound(){
+  if(elim.finished) return;
+
+  if(elim.p1Current.length !== 3 || elim.p2Current.length !== 3){
+    toast("يجب إدخال 3 أسهم لكل من اللاعبين لحسم الجولة.");
+    return;
+  }
+
+  const p1Score = elim.p1Current.reduce((a,b)=>a+b, 0);
+  const p2Score = elim.p2Current.reduce((a,b)=>a+b, 0);
+
+  const p1Name = $("elimP1Name").value || "اللاعب 1";
+  const p2Name = $("elimP2Name").value || "اللاعب 2";
+
+  let resText = "";
+
+  if(p1Score > p2Score){
+    elim.p1Points += 2;
+    resText = `فوز ${p1Name}`;
+  } else if(p2Score > p1Score){
+    elim.p2Points += 2;
+    resText = `فوز ${p2Name}`;
+  } else {
+    elim.p1Points += 1;
+    elim.p2Points += 1;
+    resText = "تعادل";
+  }
+
+  elim.rounds.push({
+    n: elim.round,
+    p1: p1Score,
+    p2: p2Score,
+    result: resText
+  });
+
+  if(elim.p1Points >= 6 || elim.p2Points >= 6){
+    elim.finished = true;
+    const winner = elim.p1Points >= 6 ? p1Name : p2Name;
+
+    renderElim();
+    playTone(elim.p1Points >= 6 ? "victory" : "low");
+    motivate("🏆", `الفائز: ${winner}!`, `انتهت المباراة بنتيجة ${elim.p1Points} - ${elim.p2Points}`);
+
+    saveHistory({
+      type: "elim",
+      name: `${p1Name} vs ${p2Name}`,
+      date: new Date().toLocaleString("ar-EG"),
+      total: `${elim.p1Points} - ${elim.p2Points}`,
+      result: `فوز ${winner}`
+    });
+    return;
+  }
+
+  if(elim.p1Points === 5 && elim.p2Points === 5){
+    elim.shootout = true;
+    $("shootout").classList.add("show");
+    playTone("tension");
+    motivate("🔥", "5 — 5 تعادل حاسم!", "سهم كسر التعادل (Shoot-off).");
+    renderElim();
+    return;
+  }
+
+  elim.round++;
+  elim.p1Current = [];
+  elim.p2Current = [];
+  elim.p1Coords = [];
+  elim.p2Coords = [];
+  elim.currentTurn = 1;
+
+  renderElim();
+  renderElimArrowHoles();
+}
+
+function shootoutArrow(val){
+  const p1Name = $("elimP1Name").value || "اللاعب 1";
+  const p2Name = $("elimP2Name").value || "اللاعب 2";
+
+  if(elim.shootoutP1 === null){
+    elim.shootoutP1 = val;
+    toast(`تم تسجيل سهم ${p1Name}: ${val} .. أدخل سهم ${p2Name}`);
+  } else {
+    const p2Val = val;
+    const p1Val = elim.shootoutP1;
+    elim.shootoutP1 = null;
+
+    if(p1Val > p2Val){
+      elim.p1Points = 6;
+      elim.finished = true;
+      elim.shootout = false;
+      playTone("victory");
+      motivate("🏆", `فاز ${p1Name}!`, `سهم التمايز: ${p1Val} مقابل ${p2Val}`);
+      saveHistory({ type: "elim", name: `${p1Name} vs ${p2Name}`, date: new Date().toLocaleString("ar-EG"), total: "6 - 5", result: `فوز ${p1Name} (كسر تعادل)` });
+    } else if(p2Val > p1Val){
+      elim.p2Points = 6;
+      elim.finished = true;
+      elim.shootout = false;
+      playTone("victory");
+      motivate("🏆", `فاز ${p2Name}!`, `سهم التمايز: ${p2Val} مقابل ${p1Val}`);
+      saveHistory({ type: "elim", name: `${p1Name} vs ${p2Name}`, date: new Date().toLocaleString("ar-EG"), total: "5 - 6", result: `فوز ${p2Name} (كسر تعادل)` });
+    } else {
+      playTone("tension");
+      motivate("🔥", "تعادل في كسر التعادل!", "أطلقوا سهم تمايز آخر.");
+    }
+
+    $("shootout").classList.remove("show");
+    renderElim();
+  }
+}
+
+function renderElim(){
+  const p1Name = $("elimP1Name").value || "عمران";
+  const p2Name = $("elimP2Name").value || "الخصم";
+
+  $("myElimName").textContent = p1Name;
+  $("oppElimName").textContent = p2Name;
+  $("turnLabelP1").textContent = p1Name;
+  $("turnLabelP2").textContent = p2Name;
+
+  $("myPoints").textContent = elim.p1Points;
+  $("oppPoints").textContent = elim.p2Points;
+
+  $("p1Box").classList.toggle("active-turn", elim.currentTurn === 1);
+  $("p2Box").classList.toggle("active-turn", elim.currentTurn === 2);
+
+  $("elimRoundNo").textContent = elim.finished ? "انتهت المباراة" : `الجولة ${elim.round}`;
+
+  $("myRound").textContent = elim.p1Current.length ? elim.p1Current.join(" · ") : "—";
+  $("oppRound").textContent = elim.p2Current.length ? elim.p2Current.join(" · ") : "—";
+
+  const currentArr = elim.currentTurn === 1 ? elim.p1Current : elim.p2Current;
+  for(let i=0; i<3; i++){
+    $("e" + (i+1)).textContent = currentArr[i] ?? "—";
+  }
+  $("eScore").textContent = currentArr.reduce((a,b)=>a+b, 0);
+
+  $("rounds").innerHTML = elim.rounds.map(r => `
+    <div class="round ${r.result.includes(p1Name) ? 'win' : ''}">
+      <span>ج${r.n}</span>
+      <b>${r.p1}</b>
+      <span class="result">${r.p1 > r.p2 ? '✓' : r.p1 < r.p2 ? '×' : '='}</span>
+      <b>${r.p2}</b>
     </div>
   `).join("");
 }
 
-function clearHistory() {
-  localStorage.removeItem("archeryHistory");
+/* =========================
+   LIFETIME ARROW COUNTER LOGIC
+========================= */
+
+function updateLifetimeDisplay(){
+  $("lifetimeCounterDisplay").textContent = lifetimeArrowCount.toLocaleString("ar-EG");
+
+  let badge = "مبتدئ · واصل التدريب!";
+  if(lifetimeArrowCount >= 10000) badge = "🏹 رامٍ محترف خبير (10K+ سهم)";
+  else if(lifetimeArrowCount >= 5000) badge = "🥇 رامٍ متقدم (5K+ سهم)";
+  else if(lifetimeArrowCount >= 2000) badge = "🎯 رامٍ متمكن (2K+ سهم)";
+  else if(lifetimeArrowCount >= 500) badge = "🔥 رامٍ نشط (500+ سهم)";
+
+  $("counterLevelBadge").textContent = badge;
+}
+
+function addLifetimeArrows(){
+  const val = parseInt($("addArrowInput").value);
+  if(isNaN(val) || val <= 0){
+    toast("أدخل عدداً صحيحاً للأسهم.");
+    return;
+  }
+  lifetimeArrowCount += val;
+  localStorage.setItem("archeryLifetimeArrows", lifetimeArrowCount);
+  $("addArrowInput").value = "";
+  updateLifetimeDisplay();
+  playTone("success");
+  toast(`تمت إضافة ${val} سهم بنجاح!`);
+}
+
+function quickAddArrows(count){
+  lifetimeArrowCount += count;
+  localStorage.setItem("archeryLifetimeArrows", lifetimeArrowCount);
+  updateLifetimeDisplay();
+  playTone("good");
+  toast(`تمت إضافة ${count} سهم بنجاح!`);
+}
+
+function resetLifetimeCounter(){
+  if(confirm("هل أنت تأكد من إعادة ضبط عداد الأسهم الإجمالي إلى 0؟")){
+    lifetimeArrowCount = 0;
+    localStorage.setItem("archeryLifetimeArrows", 0);
+    updateLifetimeDisplay();
+    toast("تم إعادة ضبط العداد.");
+  }
+}
+
+/* =========================
+   HISTORY & STORAGE
+========================= */
+
+function saveHistory(item){
+  const h = JSON.parse(localStorage.getItem("archeryHistory") || "[]");
+  h.unshift(item);
+  localStorage.setItem("archeryHistory", JSON.stringify(h.slice(0, 50)));
   renderHistory();
 }
 
-function resetAll() {
-  session = { arrows: [], ends: [], currentEnd: [] };
-  renderEnds(); renderCurrentEnd(); updateScore();
+function renderHistory(){
+  const h = JSON.parse(localStorage.getItem("archeryHistory") || "[]");
+
+  if(!h.length){
+    $("historyList").innerHTML = '<div class="empty">لا توجد نتائج محفوظة بعد.</div>';
+    return;
+  }
+
+  $("historyList").innerHTML = h.map(x => `
+    <div class="history-item">
+      <div>
+        <b>${x.type === "score" ? "🎯" : "⚔️"} ${x.name}</b>
+        <div style="color:var(--muted); font-size:9px; margin-top:3px">
+          ${x.date} ${x.distance ? '· ' + x.distance : ''}
+        </div>
+      </div>
+      <div style="text-align:left">
+        <strong style="color:var(--gold); font-size:18px">${x.total !== undefined ? x.total : x.result}</strong>
+        <div class="badge">${x.percent ? x.percent + "%" : "مباراة إقصائي"}</div>
+      </div>
+    </div>
+  `).join("");
 }
 
-function toast(msg) {
+function clearHistory(){
+  if(confirm("هل أنت تأكد من مسح جميع النتائج المحفوظة؟")){
+    localStorage.removeItem("archeryHistory");
+    renderHistory();
+  }
+}
+
+/* =========================
+   UTILITIES & INIT
+========================= */
+
+function toast(msg){
   $("toast").textContent = msg;
   $("toast").classList.add("show");
-  setTimeout(() => $("toast").classList.remove("show"), 2000);
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => $("toast").classList.remove("show"), 1800);
 }
 
-// INIT
-renderTarget();
-renderCurrentEnd();
-updateScore();
+function resetAll(){
+  if(confirm("بدء جلسة سكور جديدة؟")){
+    resetSession();
+    toast("بدأت جلسة جديدة.");
+  }
+}
+
+loadSavedSettings();
+drawTargetSvg("targetSvg");
+drawTargetSvg("elimTargetSvg");
+renderArrowButtons();
+resetSession();
+renderElim();
 renderHistory();
+
+/* KEYBOARD SUPPORT */
+document.addEventListener("keydown", e => {
+  const map = { "0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9 };
+  const active = document.querySelector(".page.active")?.id;
+
+  if(Object.prototype.hasOwnProperty.call(map, e.key)){
+    if(active === "score") addArrow(map[e.key]);
+    if(active === "elim") addElimArrow(map[e.key]);
+  }
+
+  if(e.key === "Backspace"){
+    if(active === "score") undoArrow();
+    if(active === "elim") undoElimArrow();
+  }
+});
 </script>
+
 </body>
 </html>
